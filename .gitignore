@@ -1,0 +1,11 @@
+Close
+Data
+BuySell
+node_modules
+Old
+__pycache__
+*.py
+*.txt
+*.pickle
+*.pyproj
+*.sln

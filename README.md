@@ -28,7 +28,7 @@ The Brief page offers a condensed view of this information.
 The ticker list box and accompanying option buttons allow users to filter by All, Buy, Sell, Held, and Wait categories.
 Refresh times are conveniently displayed on the menu, occurring a few hours after market close.
 
-# No Cost, No Subscription, No Personal Tracking
+**No Cost, No Subscription, No Personal Tracking**
 
 There is no cost for using this site.
 There are no subscription steps or fees.

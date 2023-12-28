@@ -34,5 +34,5 @@ There is no cost for using this site.
 There are no subscription steps or fees.
 No personal information is tracked by this site.
 Ads appearing on the page are managed separately.
-In summary, this site presents the results when past behavior when specific conditions have been met.
+In summary, this site presents the results with past behavior when specific conditions have been met.
 You are also presented when those conditions are expected to be met with a day's notice.

@@ -358,7 +358,7 @@ function onSelectTicker() {
     document.querySelector('[onmouseover="showTabOnHover(\'TickerAnalysisTab\')"] a').textContent = "Analysis: " + selectedTicker;
 
     showSelectedTableInfo(selectedTicker, dictBuySellTableInfo, 'tickerTransactionTableContainer', 'tickerTransactionTable', aiRound = iaTransactionsRound, iaFactor = iaTransactionsFactor);
-    cellMoreColor(sTableName = 'tickerTransactionTable', vThresholds = vaTransactionsTableThresholds, sColumnIndex = sTransactionsTableThresholdOrderColumnIndex);
+    cellMoreColor(sTableName = 'tickerTransactionTable', vThresholds = vaTransactionsTableThresholds, sColumnIndex = "6");
     $(document).ready(function () { $('#tickerTransactionTable').DataTable({ "order": [[iTransactionsTableThresholdOrderColumnIndex, 'desc']] }); });
 }
 

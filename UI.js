@@ -519,4 +519,4 @@ document.getElementById("tickerHint").innerHTML =
     'Most of these securities have a minimum volume of one million shares a day.  This ensures liquidity.<br>' +
     'The charts compare returns for a security if it is held, if one executes the suggested trades, and also if one maintains a diversified portfolio.'
 
-document.getElementById("LastRefresh").innerHTML = dictTotalsSummary["RefreshTimestamp"].substring(0, 19)
+document.getElementById("LastRefresh").innerHTML = dictTotalsSummary["RefreshTimestamp"].substring(0, 19) + ' PST'

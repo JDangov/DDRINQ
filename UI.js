@@ -357,9 +357,11 @@ function onSelectTicker() {
     showAnalysisTableInfo(dictTickerTotals[selectedTicker], 'tickerAnalysisTableContainer');
     document.querySelector('[onmouseover="showTabOnHover(\'TickerAnalysisTab\')"] a').textContent = "Analysis: " + selectedTicker;
 
+    sTickerTransactionDailyReturnColumnIndex = "6";
+    iTickerTransactionBuyDateColumnIndex = 1;
     showSelectedTableInfo(selectedTicker, dictBuySellTableInfo, 'tickerTransactionTableContainer', 'tickerTransactionTable', aiRound = iaTransactionsRound, iaFactor = iaTransactionsFactor);
-    cellMoreColor(sTableName = 'tickerTransactionTable', vThresholds = vaTransactionsTableThresholds, sColumnIndex = "6");
-    $(document).ready(function () { $('#tickerTransactionTable').DataTable({ "order": [[iTransactionsTableThresholdOrderColumnIndex, 'desc']] }); });
+    cellMoreColor(sTableName = 'tickerTransactionTable', vThresholds = vaTransactionsTableThresholds, sColumnIndex = sTickerTransactionDailyReturnColumnIndex);
+    $(document).ready(function () { $('#tickerTransactionTable').DataTable({ "order": [[iTickerTransactionBuyDateColumnIndex, 'desc']] }); });
 }
 
 function populateTickerSelector(sSetType) {
@@ -438,10 +440,12 @@ vaLastTransactionThresholds = [
 iLastTransactionThresholdOrderColumnIndex = 2;
 sLastTransactionThresholdOrderColumnIndex = "" + iLastTransactionThresholdOrderColumnIndex;
 iaLastTransactionRound = [null, 2, 2, 2, 2, 2, null, 2];
+iDateColumnIndex = 1;
+iTickerColumnIndex = 0;
 iaLastTransactionFactor = [null, null, null, null, null, null, null, null];
 cellLessColor(sTableName = 'lastTransactionTable', vThresholds = vaLastTransactionThresholds, sColumnIndex = sLastTransactionThresholdOrderColumnIndex);
 showTickerInfo(dictTickerInfo = dictLastTransaction, sTickerContainer = 'LastTransactionTableContainer', sTableId = 'lastTransactionTable', iaRound = iaLastTransactionRound, iaFactor = iaLastTransactionFactor);
-$(document).ready(function () { $('#lastTransactionTable').DataTable({ "order": [[iLastTransactionThresholdOrderColumnIndex, 'asc']] }); });
+$(document).ready(function () { $('#lastTransactionTable').DataTable({ "order": [[iDateColumnIndex, 'desc'], [iTickerColumnIndex, 'asc']] }); });
 
 vaTransactionsTableThresholds = [
     { class: 'blue', value: 5. },

@@ -508,7 +508,7 @@ window.onload = populateTickerSelector;
 showAnalysisTableInfo(dictTotalsSummary, 'homeTableContainer');
 
 document.getElementById("buyComments").innerHTML = '<b>(' + dictTotalsSummary["CloseDate"] + ') Next Day Buy Signal</b>: If the price drops below the buy price and then rises to that price then buy.';
-document.getElementById("sellComments").innerHTML = '<b>(' + dictTotalsSummary["ClosoeDate"] + ') Next Day Sell Signal</b>: If the price drops below the sell price and then rises to that price then sell.';
+document.getElementById("sellComments").innerHTML = '<b>(' + dictTotalsSummary["CloseDate"] + ') Next Day Sell Signal</b>: If the price drops below the sell price and then rises to that price then sell.';
 
 document.getElementById("buyHint").innerHTML =
     'Signals were completed end of trade day: <b>(' + dictTotalsSummary["CloseDate"] + ')</b>. Below are ' + Object.keys(dictBuyTickerInfo['Data']).length + ' potential trades.<br>' +

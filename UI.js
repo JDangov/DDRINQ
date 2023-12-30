@@ -502,7 +502,7 @@ showTickerInfo(dictTickerInfo = dictLastBuySell, sTickerContainer = 'lastSoldTab
 cellMoreColor(sTableName = 'lastSoldTable', vThresholds = vaLastSoldTableThresholds, sColumnIndex = sLastSoldTableThresholdOrderColumnIndex);
 $(document).ready(function () { $('#lastSoldTable').DataTable({ "order": [[iLastSoldTableThresholdOrderColumnIndex, 'desc']] }); });
 
-document.body.style.zoom = "200%";
+document.body.style.zoom = "190%";
 showTabOnHover('TickerTab');
 window.onload = populateTickerSelector;
 showAnalysisTableInfo(dictTotalsSummary, 'homeTableContainer');

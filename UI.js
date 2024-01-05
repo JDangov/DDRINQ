@@ -28,7 +28,12 @@ function showTickerInfo(dictTableInfo, sTableContainer, sTableId, iaRound, iaFac
             const cell = document.createElement('td');
             const iRound = iaRound[iColumnIndex];
             if (iRound > 0) {
-                cell.textContent = (parseFloat(saRowData[iColumnIndex]) * (iaFactor[iColumnIndex] == null ? 1 : iaFactor[iColumnIndex])).toFixed(iRound);
+                dCell = parseFloat(saRowData[iColumnIndex])
+                if (isNaN(dCell)) {
+                    cell.textContent = saRowData[iColumnIndex];
+                } else {
+                    cell.textContent = (dCell * (iaFactor[iColumnIndex] == null ? 1 : iaFactor[iColumnIndex])).toFixed(iRound);
+                }
             } else if (iRound == 0) {
                 cell.textContent = '' + parseInt(saRowData[iColumnIndex]);
             } else {
@@ -261,7 +266,7 @@ function showTabOnHover(tabName) {
     document.getElementById(tabName).style.display = "block";
     oTopSectionStyle = document.getElementById('topSection').style
     if ((tabName === 'HomeTab') || (tabName === 'TickerAnalysisTab') || (tabName === 'BuyTab') || (tabName === 'SellTab') ||
-        (tabName === 'SummaryTab') || (tabName === 'LastSoldTab') || (tabName === 'LastTransactionTab')
+        (tabName === 'SummaryTab') || (tabName === 'LastSoldTab') || (tabName === 'LastTransactionTab') || (tabName === 'CurrentSessionTab')
     ) {
         oTopSectionStyle.display = "none";
     } else {
@@ -502,6 +507,26 @@ showTickerInfo(dictTickerInfo = dictLastBuySell, sTickerContainer = 'lastSoldTab
 cellMoreColor(sTableName = 'lastSoldTable', vThresholds = vaLastSoldTableThresholds, sColumnIndex = sLastSoldTableThresholdOrderColumnIndex);
 $(document).ready(function () { $('#lastSoldTable').DataTable({ "order": [[iLastSoldTableThresholdOrderColumnIndex, 'desc']] }); });
 
+vaCurrentSessionTableThresholds = [
+    { class: 'blue', value: 1. },
+    { class: 'lightblue', value: 0.5 },
+    { class: 'green', value: 0.2 },
+    { class: 'lightgreen', value: 0.1 },
+    { class: 'yellow', value: -0.2 },
+    { class: 'red', value: -100. }
+];
+vaCurrentSessionBooleanTableThresholds = [
+    { class: 'lightgreen', value: 'True' },
+    { class: 'yellow', value: 'False' }
+];
+iCurrentSessionTableThresholdOrderColumnIndex = 13;
+sCurrentSessionTableThresholdOrderColumnIndex = "" + iCurrentSessionTableThresholdOrderColumnIndex;
+iaCurrentSessionRound = [null, null, 2, 2, null, 2, null, 2, null, 2, null, 2, 4];
+iaCurrentSessionFactor = [null, null, null, null, null, null, null, null, null, null, null, null, 100];
+showTickerInfo(dictTickerInfo = dictCurrentSession, sTickerContainer = 'CurrentSessionTableContainer', sTableId = 'currentSessionTable', iaRound = iaCurrentSessionRound, iaFactor = iaCurrentSessionFactor);
+cellMoreColor(sTableName = 'currentSessionTable', vThresholds = vaCurrentSessionTableThresholds, sColumnIndex = sCurrentSessionTableThresholdOrderColumnIndex);
+$(document).ready(function () { $('#currentSessionTable').DataTable({ "order": [[iCurrentSessionTableThresholdOrderColumnIndex, 'desc']] }); });
+
 document.body.style.zoom = "190%";
 showTabOnHover('TickerTab');
 window.onload = populateTickerSelector;
@@ -513,14 +538,27 @@ document.getElementById("sellComments").innerHTML = '<b>(' + dictTotalsSummary["
 document.getElementById("buyHint").innerHTML =
     'Signals were completed end of trade day: <b>(' + dictTotalsSummary["CloseDate"] + ')</b>. Below are ' + Object.keys(dictBuyTickerInfo['Data']).length + ' potential trades.<br>' +
     'The buy conditions were refreshed at <b>' + dictTotalsSummary["RefreshTimestamp"].substring(0, 19) + ' PST</b> and take effect the next trade day.<br>' +
-    'If the price drops below the suggested buy price and then rises to or above that price then the buy conditions are satisfied'
+    'If the price drops below the suggested buy price and then rises to or above that price then the buy conditions are satisfied';
 document.getElementById("sellHint").innerHTML =
     'Signals were completed end of trade day: <b>(' + dictTotalsSummary["CloseDate"] + ')</b>. Below are ' + Object.keys(dictSellTickerInfo['Data']).length + ' potential trades.<br>' +
     'The sell conditions were refreshed at <b>' + dictTotalsSummary["RefreshTimestamp"].substring(0, 19) + ' PST</b> and take effect the next trade day.<br>' +
-    'If the price drops at or below the suggested sell price then the sell conditions are satisfied.'
+    'If the price drops at or below the suggested sell price then the sell conditions are satisfied.';
 document.getElementById("tickerHint").innerHTML =
     '' + saTicker.length + ' Tickers were chosen in 2020.  The signals have been back tested since <b>' + dictTotalsSummary["StartDate"] + '</b>.<br>' +
     'Most of these securities have a minimum volume of one million shares a day.  This ensures liquidity.<br>' +
-    'The charts compare returns for a security if it is held, if one executes the suggested trades, and also if one maintains a diversified portfolio.'
+    'The charts compare returns for a security if it is held, if one executes the suggested trades, and also if one maintains a diversified portfolio.';
 
-document.getElementById("LastRefresh").innerHTML = dictTotalsSummary["RefreshTimestamp"].substring(0, 19) + ' PST'
+document.getElementById("LastRefresh").innerHTML = dictTotalsSummary["RefreshTimestamp"].substring(0, 19) + ' PST';
+
+document.getElementById("CurrentSessionTotals").innerHTML =
+    'Of ' + dictCurrentSessionCounts["Ticker Count"] + ' tickers ' +
+    ' there are ' + dictCurrentSessionCounts["Next Buy Count"] + ' potential buys and ' +
+    dictCurrentSessionCounts["Next Sell Count"] + ' potential sells for the trade day after ' + sCloseDate + '. ' +
+    fn(dictCurrentSessionCounts["Next Ratio"], '', '%', 0, 100) + ' are in play.<br>' +
+    fn(dictCurrentSessionCounts["Current Ratio"], '', '%', 0, 100) + ' were in play on ' + sCloseDate + '. ' +
+    dictCurrentSessionCounts["Current Bought Count"] + ' were bought of ' + dictCurrentSessionCounts["Current Buy Count"] + ' potential buys' +
+    ' (' + fn(dictCurrentSessionCounts["Bought Success Rate"], '', '%', 0, 100) + ' success rate). ' +
+    dictCurrentSessionCounts["Current Sold Count"] + ' were sold of ' + dictCurrentSessionCounts["Current Sell Count"] + ' potential sells' +
+    ' (' + fn(dictCurrentSessionCounts["Sold Success Rate"], '', '%', 0, 100) + ' success rate).';
+    
+    

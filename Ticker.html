@@ -129,15 +129,15 @@
             justify-content: left;
         }
 
-        #homeTable, #tickerAnalysisTable, #buyTable, #sellTable, #transactionsTable, #lastSoldTable, #summaryTable, #briefSummaryTable, #lastTransactionTable, #tickerBriefSummaryTable, #tickerTransactionTable, #tickerLastTransactionTable,
-        #homeTable th, #tickerAnalysisTable th, #buyTable th, #sellTable th, #transactionsTable th, #lastSoldTable th, #summaryTable th, #briefSummaryTable th, #lastTransactionTable th, #tickerBriefSummaryTable th, #tickerTransactionTable th, #tickerLastTransactionTable th,
-        #homeTable td, #tickerAnalysisTable td, #buyTable td, #sellTable td, #transactionsTable td, #lastSoldTable td, #summaryTable td, #briefSummaryTable td, #lastTransactionTable td, #tickerBriefSummaryTable td, #tickerTransactionTable td, #tickerLastTransactionTable td {
+        #homeTable, #tickerAnalysisTable, #buyTable, #sellTable, #transactionsTable, #lastSoldTable, #summaryTable, #briefSummaryTable, #lastTransactionTable, #currentSessionTable, #tickerBriefSummaryTable, #tickerTransactionTable, #tickerLastTransactionTable,
+        #homeTable th, #tickerAnalysisTable th, #buyTable th, #sellTable th, #transactionsTable th, #lastSoldTable th, #summaryTable th, #briefSummaryTable th, #lastTransactionTable th, #currentSessionTable th, #tickerBriefSummaryTable th, #tickerTransactionTable th, #tickerLastTransactionTable th,
+        #homeTable td, #tickerAnalysisTable td, #buyTable td, #sellTable td, #transactionsTable td, #lastSoldTable td, #summaryTable td, #briefSummaryTable td, #lastTransactionTable td, #currentSessionTable td, #tickerBriefSummaryTable td, #tickerTransactionTable td, #tickerLastTransactionTable td {
             border: 1px solid black;
             padding: 8px;
             text-align: right;
         }
 
-        #homeTable, #tickerAnalysisTable, #buyTable, #sellTable, #transactionsTable, #lastSoldTable, #summaryTable, #briefSummaryTable, #lastTransactionTable, #tickerBriefSummaryTable, #tickerTransactionTable, #tickerLastTransactionTable {
+        #homeTable, #tickerAnalysisTable, #buyTable, #sellTable, #transactionsTable, #lastSoldTable, #summaryTable, #briefSummaryTable, #lastTransactionTable, #currentSessionTable, #tickerBriefSummaryTable, #tickerTransactionTable, #tickerLastTransactionTable {
             margin-top: 20px;
             border-collapse: collapse;
             width: 100%;
@@ -241,6 +241,7 @@
             <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('BriefSummaryTab')"><a href="#">Brief</a></li>
             <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('LastSoldTab')"><a href="#">Last Sold</a></li>
             <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('LastTransactionTab')"><a href="#">Last Transaction</a></li>
+            <li onmouseout="mouseOutMenu(this);" onmouseover="showTabOnHover('CurrentSessionTab')"><a href="#">Current Session</a></li>
         </ul>
         <div>
             <b>&nbsp;&nbsp;&nbsp;Last Refresh</b>: <span id="LastRefresh"></span>
@@ -335,6 +336,10 @@
     </div>
     <div id="LastTransactionTab" class="tab">
         <div id="LastTransactionTableContainer"></div>
+    </div>
+    <div id="CurrentSessionTab" class="tab">
+        <p id="CurrentSessionTotals"></p>
+        <div id="CurrentSessionTableContainer"></div>
     </div>
 </body>
 </html>
